@@ -25,7 +25,7 @@ class CompanyRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'logo' => '',
+            'logo' => 'dimensions:min_width=100,min_height=100'
         ];
     }
 }
