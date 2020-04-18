@@ -19,8 +19,9 @@
             <th with="80px">No</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Logo</th>
             <th>Website</th>
-            <th with="140px" class="text-center">
+            <th width="180" class="text-center">
                 <a href="{{route('companies.create')}}" class="btn btn-success btn-sm">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
@@ -32,8 +33,9 @@
                 <td>{{$value->id}}</td>
                 <td>{{ $value->name }}</td>
                 <td>{{ $value->email }}</td>
+                <td class="text-center"><img width="150" src="/storage/images/logo/{{ $value->logo }}" alt="img"></td>
                 <td>{{ $value->website }}</td>
-                <td>
+                <td class="text-center">
                     <a class="btn btn-info btn-sm" href="{{route('companies.show',$value->id)}}">
                         <i class="fa fa-puzzle-piece" aria-hidden="true"></i></a>
                     <a class="btn btn-primary btn-sm" href="{{route('companies.edit',$value->id)}}">

@@ -26,6 +26,12 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>Logo: </strong>
+                <img width="150" src="/storage/images/logo/{{ $company->logo }}" alt="img">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Website: </strong>
                 {{ $company->website}}
             </div>
