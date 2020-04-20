@@ -20,10 +20,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/register', function () {
+    abort(404);
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('employees', 'EmployeeController');
-//Route::get('/employee', 'EmployeeController@index')->name('employee');
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('companies', 'CompanyController');
+    Route::resource('employees', 'EmployeeController');
+});
 
-Route::resource('companies', 'CompanyController');
-//Route::get('/companies', 'CompanyController@index')->name('company');
+

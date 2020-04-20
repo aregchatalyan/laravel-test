@@ -26,6 +26,14 @@
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
+            @if(Request::is('companies'))
+                <a class="nav-link" href="{{ url('/employees') }}">Employees</a>
+            @elseif(Request::is('employees'))
+                <a class="nav-link" href="{{ url('/companies') }}">Companies</a>
+                @else
+                <a class="nav-link" href="{{ url('/companies') }}">Companies</a>
+                <a class="nav-link" href="{{ url('/employees') }}">Employees</a>
+            @endif
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">

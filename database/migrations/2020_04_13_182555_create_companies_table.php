@@ -19,8 +19,7 @@ class CreateCompaniesTable extends Migration
             $table->string('email')->nullable();
             $table->string('logo')->nullable();
             $table->string('website')->nullable();
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamps();
         });
     }
 

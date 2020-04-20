@@ -16,7 +16,7 @@ class CompanyController extends Controller
     public function index()
     {
         $company = Company::all();
-        return view('admin.index', compact('company'));
+        return view('admin.company.index', compact('company'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        return view('admin.company.create');
     }
 
     /**
@@ -37,13 +37,6 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required',
-            'logo' => 'required',
-            'website' => 'required'
-        ]);
-
         if ($request->hasFile('logo')){
             $filenameWithExt = $request->file('logo')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -61,7 +54,7 @@ class CompanyController extends Controller
         $company->website = $request->input('website');
         $company->save();
 
-        return redirect()->route('companies.index')->with('success', 'Company created success');
+        return redirect()->route('companies.index')->with('success', 'company created success');
     }
 
     /**
@@ -73,7 +66,7 @@ class CompanyController extends Controller
     public function show($id)
     {
         $company = Company::find($id);
-        return view('admin.show', compact('company'));
+        return view('admin.company.show', compact('company'));
     }
 
     /**
@@ -85,7 +78,7 @@ class CompanyController extends Controller
     public function edit($id)
     {
         $company = Company::find($id);
-        return view('admin.edit', compact('company'));
+        return view('admin.company.edit', compact('company'));
     }
 
     /**
@@ -97,13 +90,6 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-            'logo' => 'required',
-            'website' => 'required'
-        ]);
-
         if ($request->hasFile('logo')){
             $filenameWithExt = $request->file('logo')->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -120,7 +106,7 @@ class CompanyController extends Controller
         $company->logo = $fileNameToStore;
         $company->website = $request->input('website');
         $company->update();
-        return redirect()->route('companies.index')->with('success', 'Company update success');
+        return redirect()->route('companies.index')->with('success', 'company update success');
     }
 
     /**
@@ -137,6 +123,6 @@ class CompanyController extends Controller
         }
         $company->delete();
 
-        return redirect()->route('companies.index')->with('success', 'Company deleted success');
+        return redirect()->route('companies.index')->with('success', 'company deleted success');
     }
 }
