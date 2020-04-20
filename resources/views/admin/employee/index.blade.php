@@ -47,4 +47,5 @@
             </tr>
         @endforeach
     </table>
+    {{$employee->links()}}
 @endsection

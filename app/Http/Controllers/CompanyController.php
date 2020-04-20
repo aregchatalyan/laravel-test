@@ -15,7 +15,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $company = Company::all();
+        $company = Company::paginate(10);
         return view('admin.company.index', compact('company'));
     }
 
