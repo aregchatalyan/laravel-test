@@ -26,9 +26,12 @@ Route::get('/register', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/logout', function () {
+   Auth::logout();
+   return redirect('/login');
+})->name('logout');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('companies', 'CompanyController');
     Route::resource('employees', 'EmployeeController');
 });
-
-

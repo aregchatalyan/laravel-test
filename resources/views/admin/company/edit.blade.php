@@ -2,9 +2,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            {{ Form::model($company,['route'=>['companies.update',$company->id],'method'=>'PATCH', 'enctype' => 'multipart/form-data']) }}
-            @include('admin.company.form_master')
-            {{ Form::close() }}
+            <form method="POST" action="{{ route('companies.update',$company->id) }}" enctype="multipart/form-data">
+                @csrf
+                <input name="_method" type="hidden" value="PATCH">
+                @include('admin.company.form_master')
+            </form>
         </div>
     </div>
 @endsection

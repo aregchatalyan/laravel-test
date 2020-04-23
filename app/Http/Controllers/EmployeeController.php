@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Http\Requests\EmployeeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Employee;
@@ -28,7 +29,8 @@ class EmployeeController extends Controller
     public function create()
     {
         $company = Company::select('id', 'name')->pluck('name', 'id');
-        return view('admin.employee.create', compact('company'));
+        $model = null;
+        return view('admin.employee.create', compact('company','model'));
     }
 
     /**
@@ -37,7 +39,7 @@ class EmployeeController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
         Employee::create($request->all());
         return redirect()->route('employees.index')->with('success', 'Employee created success');
@@ -65,7 +67,8 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
         $company = Company::select('name', 'id')->pluck('name', 'id');
-        return view('admin.employee.edit', compact('employee', 'company'));
+        $model = 1;
+        return view('admin.employee.edit', compact('employee', 'company','model'));
     }
 
     /**
@@ -75,7 +78,7 @@ class EmployeeController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EmployeeRequest $request, $id)
     {
         Employee::find($id)->update($request->all());
 

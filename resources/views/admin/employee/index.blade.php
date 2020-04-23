@@ -14,23 +14,26 @@
         </div>
     @endif
 
-    <table class="table table-bordered">
+    <table class="table table-striped table-dark">
+        <thead>
         <tr>
-            <th with="80px">No</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th width="180" class="text-center">
+            <th scope="col">No</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col" class="text-center">
                 <a href="{{route('employees.create')}}" class="btn btn-success btn-sm">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </a>
             </th>
         </tr>
+        </thead>
 
+        <tbody>
         @foreach ($employee as $key => $value)
             <tr>
-                <td>{{$value->id}}</td>
+                <td scope="row">{{ $key+1 }}</td>
                 <td>{{ $value->first_name }}</td>
                 <td>{{ $value->last_name }}</td>
                 <td>{{ $value->email }}</td>
@@ -40,12 +43,17 @@
                         <i class="fa fa-puzzle-piece" aria-hidden="true"></i></a>
                     <a class="btn btn-primary btn-sm" href="{{route('employees.edit',$value->id)}}">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                    {!! Form::open(['method' => 'DELETE','route' => ['employees.destroy', $value->id],'style'=>'display:inline']) !!}
-                    <button type="submit" style="display: inline;" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                    {!! Form::close() !!}
+                    <form method="POST" action="{{ route('employees.destroy',$value->id) }}" style="display:inline">
+                        @csrf
+                        <input name="_method" type="hidden" value="DELETE">
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"
+                                                                               aria-hidden="true"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
         @endforeach
+        </tbody>
     </table>
     {{$employee->links()}}
 @endsection

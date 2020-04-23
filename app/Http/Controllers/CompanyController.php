@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanyRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Company;
@@ -26,7 +27,8 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view('admin.company.create');
+        $model = null;
+        return view('admin.company.create', compact('model'));
     }
 
     /**
@@ -35,13 +37,13 @@ class CompanyController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanyRequest $request)
     {
-        if ($request->hasFile('logo')){
+        if ($request->hasFile('logo')) {
             $filenameWithExt = $request->file('logo')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+//            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('logo')->getClientOriginalExtension();
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $fileNameToStore = $request->name . '_' . time() . '.' . $extension;
             $path = $request->file('logo')->storeAs('public/images/logo', $fileNameToStore);
         } else {
             $fileNameToStore = 'nologo.jpg';
@@ -54,7 +56,7 @@ class CompanyController extends Controller
         $company->website = $request->input('website');
         $company->save();
 
-        return redirect()->route('companies.index')->with('success', 'company created success');
+        return redirect()->route('companies.index')->with('success', 'Company created success');
     }
 
     /**
@@ -78,7 +80,8 @@ class CompanyController extends Controller
     public function edit($id)
     {
         $company = Company::find($id);
-        return view('admin.company.edit', compact('company'));
+        $model = 1;
+        return view('admin.company.edit', compact('company', 'model'));
     }
 
     /**
@@ -88,13 +91,13 @@ class CompanyController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CompanyRequest $request, $id)
     {
-        if ($request->hasFile('logo')){
+        if ($request->hasFile('logo')) {
             $filenameWithExt = $request->file('logo')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+//            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('logo')->getClientOriginalExtension();
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $fileNameToStore = $request->name . '_' . time() . '.' . $extension;
             $path = $request->file('logo')->storeAs('public/images/logo', $fileNameToStore);
         } else {
             $fileNameToStore = 'nologo.jpg';
@@ -106,7 +109,7 @@ class CompanyController extends Controller
         $company->logo = $fileNameToStore;
         $company->website = $request->input('website');
         $company->update();
-        return redirect()->route('companies.index')->with('success', 'company update success');
+        return redirect()->route('companies.index')->with('success', 'Company update success');
     }
 
     /**
@@ -118,11 +121,11 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         $company = Company::find($id);
-        if($company->logo != 'noimage.jpg'){
-            Storage::delete('public/images/logo/'.$company->logo);
+        if ($company->logo != 'noimage.jpg') {
+            Storage::delete('public/images/logo/' . $company->logo);
         }
         $company->delete();
 
-        return redirect()->route('companies.index')->with('success', 'company deleted success');
+        return redirect()->route('companies.index')->with('success', 'Company deleted success');
     }
 }

@@ -1,10 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            {{ Form::model($employee,['route'=>['employees.update',$employee->id],'method'=>'PATCH']) }}
-            @include('admin.employee.form_master')
-            {{ Form::close() }}
+            <form method="POST" action="{{ route('employees.update',$employee->id) }}" enctype="multipart/form-data">
+                @csrf
+                <input name="_method" type="hidden" value="PATCH">
+                @include('admin.employee.form_master')
+            </form>
         </div>
     </div>
 @endsection

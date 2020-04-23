@@ -2,9 +2,10 @@
 @section('content')
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            {{ Form::open(['route'=>'companies.store', 'method'=>'POST', 'enctype' => 'multipart/form-data']) }}
-            @include('admin.company.form_master')
-            {{ form::close() }}
+            <form method="POST" action="{{ route('companies.store') }}" enctype="multipart/form-data">
+                @csrf
+                @include('admin.company.form_master')
+            </form>
         </div>
     </div>
 @endsection

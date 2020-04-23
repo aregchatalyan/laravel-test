@@ -13,7 +13,7 @@ class CompanyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,8 +24,8 @@ class CompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'logo' => 'dimensions:min_width=100,min_height=100'
+            'name' => 'required|max:255',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=100,min_height=100'
         ];
     }
 }

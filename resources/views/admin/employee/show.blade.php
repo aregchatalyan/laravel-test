@@ -12,29 +12,13 @@
             </div>
         </div>
     </div>
+
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Fisrt Name: </strong>
-                {{ $employee->first_name}}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Last Name: </strong>
-                {{ $employee->last_name}}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Email: </strong>
-                {{ $employee->email}}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Phone: </strong>
-                {{ $employee->phone }}
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">Name: {{ $employee->first_name }} {{ $employee->last_name}}</h5>
+                <h5 class="card-title">Email: {{ $employee->email}}</h5>
+                <h5 class="card-title">Phone: {{ $employee->phone }}</h5>
             </div>
         </div>
     </div>

@@ -1,64 +1,67 @@
 <div class="row">
     <div class="col-sm-3">
-        {!! form::label('first_name','First Name') !!}
+        <label for="first_name">First Name</label>
     </div>
     <div class="col-sm-9">
-        <div class="form-group {{ $errors->has('first_name') ? 'has-error' : "" }}">
-            {{ Form::text('first_name',NULL, ['class'=>'form-control',  'id'=>'first_name', 'placeholder'=>'First Name...']) }}
-            {{ $errors->first('first_name', ':message') }}
+        <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
+            <input class="form-control" id="first_name" placeholder="First Name..." name="first_name" type="text"
+                   value="{{ $employee->first_name ?? '' }}">
+            <p>{{ $errors->first('first_name', ':message') }}</p>
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-3">
-        {!! form::label('last_name','Last Name') !!}
+        <label for="last_name">Last Name</label>
     </div>
     <div class="col-sm-9">
-        <div class="form-group {{ $errors->has('first_name') ? 'has-error' : "" }}">
-            {{ Form::text('last_name',NULL, ['class'=>'form-control',  'id'=>'last_name', 'placeholder'=>'Last Name...']) }}
-            {{ $errors->first('last_name', ':message') }}
+        <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
+            <input class="form-control" id="last_name" placeholder="Last Name..." name="last_name" type="text"
+                   value="{{ $employee->last_name ?? '' }}">
+            <p>{{ $errors->first('last_name', ':message') }}</p>
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-3">
-        {!! form::label('company','Company') !!}
+        <label for="company">Company</label>
     </div>
     <div class="col-sm-9">
-        <div class="form-group {{ $errors->has('company_id') ? 'has-error' : "" }}">
-            {{ Form::select('company_id',$company,NULL, ['class'=>'form-control',  'id'=>'company', 'placeholder'=>'Company...']) }}
-            {{ $errors->first('company_id', ':message') }}
+        <div class="form-group">
+            <select id="company" class="form-control" name="company_id">
+                @foreach($company as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                @endforeach
+            </select>
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-3">
-        {!! form::label('email','Email') !!}
+        <label for="email">Email</label>
     </div>
     <div class="col-sm-9">
-        <div class="form-group {{ $errors->has('email') ? 'has-error' : "" }}">
-            {{ Form::text('email',NULL, ['class'=>'form-control', 'id'=>'email', 'placeholder'=>'Email...']) }}
-            {{ $errors->first('email', ':message') }}
+        <div class="form-group">
+            <input class="form-control" id="email" placeholder="Email..." name="email" type="text" value="{{ $employee->email ?? '' }}">
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-3">
-        {!! form::label('phone','Phone') !!}
+        <label for="phone">Phone</label>
     </div>
     <div class="col-sm-9">
-        <div class="form-group {{ $errors->has('phone') ? 'has-error' : "" }}">
-            {{ Form::text('phone',NULL, ['class'=>'form-control', 'id'=>'phone', 'placeholder'=>'Phone...']) }}
-            {{ $errors->first('phone', ':message') }}
+        <div class="form-group">
+            <input class="form-control" id="phone" placeholder="Phone..." name="phone" type="text" value="{{ $employee->phone ?? '' }}">
         </div>
     </div>
 </div>
 
 <div class="form-group">
-    {{ Form::button(isset($model)? 'Update' : 'save' , ['class'=>'btn btn-success', 'type'=>'submit']) }}
+    <button class="btn btn-success" type="submit">{{ isset($model) ? 'Update' : 'Save' }}</button>
 </div>
 
